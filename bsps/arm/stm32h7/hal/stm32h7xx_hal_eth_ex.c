@@ -3,17 +3,15 @@
   * @file    stm32h7xx_hal_eth_ex.c
   * @author  MCD Application Team
   * @brief   ETH HAL Extended module driver.
-  *
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -30,7 +28,6 @@
 #if defined(ETH)
 
 /** @defgroup ETHEx ETHEx
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @brief ETH HAL Extended module driver
   * @{
   */
@@ -39,7 +36,6 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /** @defgroup ETHEx_Private_Constants ETHEx Private Constants
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_MACL4CR_MASK     (ETH_MACL3L4CR_L4PEN | ETH_MACL3L4CR_L4SPM | \
@@ -68,12 +64,10 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Exported functions ---------------------------------------------------------*/
 /** @defgroup ETHEx_Exported_Functions ETH Extended Exported Functions
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
 /** @defgroup ETHEx_Exported_Functions_Group1 Extended features functions
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @brief    Extended features functions
  *
 @verbatim
@@ -498,8 +492,8 @@ void HAL_ETHEx_DisableVLANProcessing(ETH_HandleTypeDef *heth)
   * @brief  Enters the Low Power Idle (LPI) mode
   * @param  heth: pointer to a ETH_HandleTypeDef structure that contains
   *         the configuration information for ETHERNET module
-  * @param  TxAutomate: Enable/Disbale automate enter/exit LPI mode.
-  * @param  TxClockStop: Enable/Disbale Tx clock stop in LPI mode.
+  * @param  TxAutomate: Enable/Disable automate enter/exit LPI mode.
+  * @param  TxClockStop: Enable/Disable Tx clock stop in LPI mode.
   * @retval None
   */
 void HAL_ETHEx_EnterLPIMode(ETH_HandleTypeDef *heth, FunctionalState TxAutomate, FunctionalState TxClockStop)
@@ -560,4 +554,3 @@ uint32_t HAL_ETHEx_GetMACLPIEvent(ETH_HandleTypeDef *heth)
   * @}
   */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

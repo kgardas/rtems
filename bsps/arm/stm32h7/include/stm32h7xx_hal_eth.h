@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */ 
@@ -25,9 +24,11 @@
  extern "C" {
 #endif
 
-#if defined(ETH)
+
 /* Includes ------------------------------------------------------------------*/
 #include "stm32h7xx_hal_def.h"
+
+#if defined(ETH)
 
 /** @addtogroup STM32H7xx_HAL_Driver
   * @{
@@ -48,7 +49,6 @@
 
 /*********************** Descriptors struct def section ************************/
 /** @defgroup ETH_Exported_Types ETH Exported Types
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -61,8 +61,8 @@ typedef struct
   __IO uint32_t DESC1;
   __IO uint32_t DESC2;
   __IO uint32_t DESC3;
-  __IO uint32_t BackupAddr0; /* used to store rx buffer 1 address */
-  __IO uint32_t BackupAddr1; /* used to store rx buffer 2 address */
+  uint32_t BackupAddr0; /* used to store rx buffer 1 address */
+  uint32_t BackupAddr1; /* used to store rx buffer 2 address */
 }ETH_DMADescTypeDef;
 /** 
   * 
@@ -88,10 +88,15 @@ typedef struct __ETH_BufferTypeDef
   */
 typedef struct
 {
-  uint32_t  TxDesc[ETH_TX_DESC_CNT];     /*<! Tx DMA descriptors addresses */
+  uint32_t  TxDesc[ETH_TX_DESC_CNT];        /*<! Tx DMA descriptors addresses */
   
-  uint32_t  CurTxDesc;               /*<! Current Tx descriptor index for packet transmission */
-  
+  uint32_t  CurTxDesc;                      /*<! Current Tx descriptor index for packet transmission */
+
+  uint32_t* PacketAddress[ETH_TX_DESC_CNT];  /*<! Ethernet packet addresses array */
+
+  uint32_t* CurrentPacketAddress;           /*<! Current transmit NX_PACKET addresses */
+
+  uint32_t BuffersInUse;                   /*<! Buffers in Use */
 }ETH_TxDescListTypeDef;
 /** 
   * 
@@ -537,17 +542,15 @@ typedef struct{
 
 /* Exported constants --------------------------------------------------------*/
 /** @defgroup ETH_Exported_Constants ETH Exported Constants
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
 /** @defgroup ETH_DMA_Tx_Descriptor_Bit_Definition ETH DMA Tx Descriptor Bit Definition
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
 /*
-   DMA Tx Normal Desciptor Read Format
+   DMA Tx Normal Descriptor Read Format
   -----------------------------------------------------------------------------------------------
   TDES0 |                         Buffer1 or Header Address  [31:0]                              |
   -----------------------------------------------------------------------------------------------
@@ -660,7 +663,7 @@ typedef struct{
 
 
 /*
-   DMA Tx Context Desciptor
+   DMA Tx Context Descriptor
   -----------------------------------------------------------------------------------------------
   TDES0 |                               Timestamp Low                                            |
   -----------------------------------------------------------------------------------------------
@@ -711,7 +714,6 @@ typedef struct{
 
 
 /** @defgroup ETH_DMA_Rx_Descriptor_Bit_Definition ETH DMA Rx Descriptor Bit Definition
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -871,7 +873,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Frame_settings ETH frame settings
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_MAX_PACKET_SIZE      ((uint32_t)1528U)    /*!< ETH_HEADER + 2*VLAN_TAG + MAX_ETH_PAYLOAD + ETH_CRC */
@@ -886,7 +887,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Error_Code ETH Error Code
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define HAL_ETH_ERROR_NONE         ((uint32_t)0x00000000U)   /*!< No error            */
@@ -903,7 +903,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Tx_Packet_Attributes ETH Tx Packet Attributes
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_TX_PACKETS_FEATURES_CSUM          ((uint32_t)0x00000001U)
@@ -917,7 +916,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Tx_Packet_Source_Addr_Control ETH Tx Packet Source Addr Control
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_SRC_ADDR_CONTROL_DISABLE          ETH_DMATXNDESCRF_SAIC_DISABLE
@@ -928,7 +926,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Tx_Packet_CRC_Pad_Control ETH Tx Packet CRC Pad Control
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_CRC_PAD_DISABLE      ETH_DMATXNDESCRF_CPC_DISABLE
@@ -940,7 +937,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Tx_Packet_Checksum_Control ETH Tx Packet Checksum Control
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_CHECKSUM_DISABLE                         ETH_DMATXNDESCRF_CIC_DISABLE
@@ -952,7 +948,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Tx_Packet_VLAN_Control ETH Tx Packet VLAN Control
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_VLAN_DISABLE  ETH_DMATXNDESCRF_VTIR_DISABLE
@@ -964,7 +959,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Tx_Packet_Inner_VLAN_Control ETH Tx Packet Inner VLAN Control
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_INNER_VLAN_DISABLE  ETH_DMATXCDESC_IVTIR_DISABLE
@@ -976,7 +970,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Rx_Checksum_Status ETH Rx Checksum Status
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_CHECKSUM_BYPASSED           ETH_DMARXNDESCWBF_IPCB
@@ -987,7 +980,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Rx_IP_Header_Type ETH Rx IP Header Type
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_IP_HEADER_IPV4   ETH_DMARXNDESCWBF_IPV4
@@ -997,7 +989,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Rx_Payload_Type ETH Rx Payload Type
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_IP_PAYLOAD_UNKNOWN   ETH_DMARXNDESCWBF_PT_UNKNOWN
@@ -1009,7 +1000,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Rx_MAC_Filter_Status ETH Rx MAC Filter Status
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_HASH_FILTER_PASS        ETH_DMARXNDESCWBF_HF
@@ -1021,7 +1011,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Rx_L3_Filter_Status ETH Rx L3 Filter Status
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_L3_FILTER0_MATCH        ETH_DMARXNDESCWBF_L3FM
@@ -1031,7 +1020,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Rx_L4_Filter_Status ETH Rx L4 Filter Status
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_L4_FILTER0_MATCH        ETH_DMARXNDESCWBF_L4FM
@@ -1041,7 +1029,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Rx_Error_Code ETH Rx Error Code
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_DRIBBLE_BIT_ERROR   ETH_DMARXNDESCWBF_DE
@@ -1055,7 +1042,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_DMA_Arbitration ETH DMA Arbitration
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_DMAARBITRATION_RX        ETH_DMAMR_DA
@@ -1081,7 +1067,6 @@ typedef struct{
   */
 
  /** @defgroup ETH_Burst_Mode ETH Burst Mode  
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_BURSTLENGTH_FIXED           ETH_DMASBMR_FB
@@ -1092,7 +1077,6 @@ typedef struct{
   */
 	
 /** @defgroup ETH_Tx_DMA_Burst_Length ETH Tx DMA Burst Length
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_TXDMABURSTLENGTH_1BEAT          ETH_DMACTCR_TPBL_1PBL   
@@ -1106,7 +1090,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Rx_DMA_Burst_Length ETH Rx DMA Burst Length
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_RXDMABURSTLENGTH_1BEAT          ETH_DMACRCR_RPBL_1PBL   
@@ -1120,7 +1103,6 @@ typedef struct{
   */	
 	
 /** @defgroup ETH_DMA_Interrupts ETH DMA Interrupts
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */	
 #define ETH_DMA_NORMAL_IT                 ETH_DMACIER_NIE 
@@ -1141,7 +1123,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_DMA_Status_Flags ETH DMA Status Flags
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */	
 #define ETH_DMA_RX_NO_ERROR_FLAG                 ((uint32_t)0x00000000U)
@@ -1166,7 +1147,6 @@ typedef struct{
   */	
 	
 /** @defgroup ETH_Transmit_Mode ETH Transmit Mode 
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_TRANSMITSTOREFORWARD       ETH_MTLTQOMR_TSF
@@ -1183,7 +1163,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Receive_Mode ETH Receive Mode 
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_RECEIVESTOREFORWARD        ETH_MTLRQOMR_RSF
@@ -1196,7 +1175,6 @@ typedef struct{
   */
 	
 /** @defgroup ETH_Pause_Low_Threshold  ETH Pause Low Threshold
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_PAUSELOWTHRESHOLD_MINUS_4        ETH_MACTFCR_PLT_MINUS4  
@@ -1210,7 +1188,6 @@ typedef struct{
   */
 	
 /** @defgroup ETH_Watchdog_Timeout ETH Watchdog Timeout
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_WATCHDOGTIMEOUT_2KB      ETH_MACWTR_WTO_2KB
@@ -1233,7 +1210,6 @@ typedef struct{
   */  
 
 /** @defgroup ETH_Inter_Packet_Gap ETH Inter Packet Gap
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_INTERPACKETGAP_96BIT   ETH_MACCR_IPG_96BIT 
@@ -1249,7 +1225,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Speed  ETH Speed
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_SPEED_10M        ((uint32_t)0x00000000U)
@@ -1259,7 +1234,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Duplex_Mode ETH Duplex Mode 
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_FULLDUPLEX_MODE       ETH_MACCR_DM
@@ -1269,7 +1243,6 @@ typedef struct{
   */
 	
 /** @defgroup ETH_Back_Off_Limit ETH Back Off Limit
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_BACKOFFLIMIT_10  ETH_MACCR_BL_10
@@ -1281,7 +1254,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Preamble_Length ETH Preamble Length
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_PREAMBLELENGTH_7      ETH_MACCR_PRELEN_7
@@ -1292,7 +1264,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_Source_Addr_Control ETH Source Addr Control
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_SOURCEADDRESS_DISABLE           ((uint32_t)0x00000000U)
@@ -1305,7 +1276,6 @@ typedef struct{
   */
   
 /** @defgroup ETH_Control_Packets_Filter ETH Control Packets Filter
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_CTRLPACKETS_BLOCK_ALL                      ETH_MACPFR_PCF_BLOCKALL
@@ -1317,7 +1287,6 @@ typedef struct{
   */
 	
 /** @defgroup ETH_VLAN_Tag_Comparison ETH VLAN Tag Comparison
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_VLANTAGCOMPARISON_16BIT          ((uint32_t)0x00000000U)
@@ -1327,7 +1296,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_MAC_addresses ETH MAC addresses
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */ 
 #define ETH_MAC_ADDRESS0     ((uint32_t)0x00000000U)
@@ -1339,7 +1307,6 @@ typedef struct{
   */    
  
 /** @defgroup ETH_MAC_Interrupts ETH MAC Interrupts
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */	
 #define ETH_MAC_RX_STATUS_IT     ETH_MACIER_RXSTSIE 
@@ -1353,7 +1320,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_MAC_Wake_Up_Event ETH MAC Wake Up Event
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */	
 #define ETH_WAKEUP_PACKET_RECIEVED    ETH_MACPCSR_RWKPRCVD 
@@ -1363,7 +1329,6 @@ typedef struct{
   */
 
 /** @defgroup ETH_MAC_Rx_Tx_Status ETH MAC Rx Tx Status
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define ETH_RECEIVE_WATCHDOG_TIMEOUT        ETH_MACRXTXSR_RWT
@@ -1378,7 +1343,6 @@ typedef struct{
   */
 
 /** @defgroup HAL_ETH_StateTypeDef ETH States
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define HAL_ETH_STATE_RESET       ((uint32_t)0x00000000U)    /*!< Peripheral not yet Initialized or disabled */
@@ -1396,7 +1360,6 @@ typedef struct{
 
 /* Exported macro ------------------------------------------------------------*/
 /** @defgroup ETH_Exported_Macros ETH Exported Macros
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -1720,4 +1683,3 @@ uint32_t             HAL_ETH_GetMACWakeUpSource(ETH_HandleTypeDef *heth);
 
 
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -40,7 +39,6 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /** @defgroup CEC_Exported_Types CEC Exported Types
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -122,14 +120,14 @@ typedef struct
   *          b6  Error information
   *             0  : No Error
   *             1  : Error
-  *          b5     IP initilisation status
-  *             0  : Reset (IP not initialized)
-  *             1  : Init done (IP initialized. HAL CEC Init function already called)
+  *          b5     CEC peripheral initialization status
+  *             0  : Reset (peripheral not initialized)
+  *             1  : Init done (peripheral initialized. HAL CEC Init function already called)
   *          b4-b3  (not used)
   *             xx : Should be set to 00
   *          b2     Intrinsic process state
   *             0  : Ready
-  *             1  : Busy (IP busy with some configuration or internal operations)
+  *             1  : Busy (peripheral busy with some configuration or internal operations)
   *          b1     (not used)
   *             x  : Should be set to 0
   *          b0     Tx state
@@ -139,9 +137,9 @@ typedef struct
   *          RxState value coding follow below described bitmap :
   *          b7-b6  (not used)
   *             xx : Should be set to 00
-  *          b5     IP initilisation status
-  *             0  : Reset (IP not initialized)
-  *             1  : Init done (IP initialized)
+  *          b5     CEC peripheral initialization status
+  *             0  : Reset (peripheral not initialized)
+  *             1  : Init done (peripheral initialized)
   *          b4-b2  (not used)
   *            xxx : Should be set to 000
   *          b1     Rx state
@@ -222,11 +220,9 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
 
 /* Exported constants --------------------------------------------------------*/
 /** @defgroup CEC_Exported_Constants CEC Exported Constants
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 /** @defgroup CEC_State_Definition CEC State Code Definition
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define   HAL_CEC_STATE_RESET      ((uint32_t)0x00000000)   /*!< Peripheral is not yet Initialized
@@ -246,7 +242,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   * @}
   */
 /** @defgroup CEC_Error_Code CEC Error Code
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define HAL_CEC_ERROR_NONE    (uint32_t) 0x0000U     /*!< no error                      */
@@ -267,7 +262,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_Signal_Free_Time  CEC Signal Free Time setting parameter
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_DEFAULT_SFT                    ((uint32_t)0x00000000U)
@@ -283,7 +277,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_Tolerance CEC Receiver Tolerance
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_STANDARD_TOLERANCE             ((uint32_t)0x00000000U)
@@ -293,7 +286,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_BRERxStop CEC Reception Stop on Error
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_NO_RX_STOP_ON_BRE             ((uint32_t)0x00000000U)
@@ -303,7 +295,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_BREErrorBitGen  CEC Error Bit Generation if Bit Rise Error reported
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_BRE_ERRORBIT_NO_GENERATION     ((uint32_t)0x00000000U)
@@ -313,7 +304,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_LBPEErrorBitGen  CEC Error Bit Generation if Long Bit Period Error reported
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_LBPE_ERRORBIT_NO_GENERATION     ((uint32_t)0x00000000U)
@@ -323,7 +313,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_BroadCastMsgErrorBitGen  CEC Error Bit Generation on Broadcast message
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_BROADCASTERROR_ERRORBIT_GENERATION     ((uint32_t)0x00000000U)
@@ -333,7 +322,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_SFT_Option     CEC Signal Free Time start option
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_SFT_START_ON_TXSOM           ((uint32_t)0x00000000U)
@@ -343,7 +331,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_Listening_Mode    CEC Listening mode option
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_REDUCED_LISTENING_MODE          ((uint32_t)0x00000000U)
@@ -353,7 +340,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_OAR_Position   CEC Device Own Address position in CEC CFGR register
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_CFGR_OAR_LSB_POS            ((uint32_t) 16U)
@@ -362,7 +348,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_Initiator_Position   CEC Initiator logical address position in message header
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_INITIATOR_LSB_POS           ((uint32_t) 4U)
@@ -371,7 +356,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_OWN_ADDRESS   CEC Own Address
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_OWN_ADDRESS_NONE           ((uint16_t) 0x0000U)   /* Reset value */
@@ -395,7 +379,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_Interrupts_Definitions  CEC Interrupts definition
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_IT_TXACKE                   CEC_IER_TXACKEIE
@@ -416,7 +399,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_Flags_Definitions  CEC Flags definition
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_FLAG_TXACKE                 CEC_ISR_TXACKE
@@ -437,7 +419,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_ALL_ERROR CEC all RX or TX errors flags
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_ISR_ALL_ERROR              ((uint32_t)CEC_ISR_RXOVR|CEC_ISR_BRE|CEC_ISR_SBPE|CEC_ISR_LBPE|CEC_ISR_RXACKE|\
@@ -447,7 +428,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_IER_ALL_RX CEC all RX errors interrupts enabling flag
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_IER_RX_ALL_ERR              ((uint32_t)CEC_IER_RXACKEIE|CEC_IER_LBPEIE|CEC_IER_SBPEIE|CEC_IER_BREIE|CEC_IER_RXOVRIE)
@@ -456,7 +436,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
   */
 
 /** @defgroup CEC_IER_ALL_TX CEC all TX errors interrupts enabling flag
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define CEC_IER_TX_ALL_ERR              ((uint32_t)CEC_IER_TXACKEIE|CEC_IER_TXERRIE|CEC_IER_TXUDRIE|CEC_IER_ARBLSTIE)
@@ -470,7 +449,6 @@ typedef  void (*pCEC_RxCallbackTypeDef)(CEC_HandleTypeDef *hcec,
 
 /* Exported macros -----------------------------------------------------------*/
 /** @defgroup CEC_Exported_Macros CEC Exported Macros
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -709,7 +687,6 @@ uint32_t HAL_CEC_GetError(CEC_HandleTypeDef *hcec);
 
 /* Private types -------------------------------------------------------------*/
 /** @defgroup CEC_Private_Types CEC Private Types
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -719,7 +696,6 @@ uint32_t HAL_CEC_GetError(CEC_HandleTypeDef *hcec);
 
 /* Private variables ---------------------------------------------------------*/
 /** @defgroup CEC_Private_Variables CEC Private Variables
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -729,7 +705,6 @@ uint32_t HAL_CEC_GetError(CEC_HandleTypeDef *hcec);
 
 /* Private constants ---------------------------------------------------------*/
 /** @defgroup CEC_Private_Constants CEC Private Constants
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -739,7 +714,6 @@ uint32_t HAL_CEC_GetError(CEC_HandleTypeDef *hcec);
 
 /* Private macros ------------------------------------------------------------*/
 /** @defgroup CEC_Private_Macros CEC Private Macros
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -793,7 +767,6 @@ uint32_t HAL_CEC_GetError(CEC_HandleTypeDef *hcec);
   */
 /* Private functions ---------------------------------------------------------*/
 /** @defgroup CEC_Private_Functions CEC Private Functions
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -817,4 +790,3 @@ uint32_t HAL_CEC_GetError(CEC_HandleTypeDef *hcec);
 
 #endif /* STM32H7xxHAL_CEC_H */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

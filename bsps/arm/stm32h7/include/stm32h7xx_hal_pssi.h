@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -39,7 +38,6 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /** @defgroup PSSI_Exported_Types PSSI Exported Types
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -128,12 +126,10 @@ typedef enum
 
 /* Exported constants --------------------------------------------------------*/
 /** @defgroup PSSI_Exported_Constants PSSI Exported Constants
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
 /** @defgroup PSSI_Error_Code PSSI Error Code
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define HAL_PSSI_ERROR_NONE             0x00000000U /*!< No error                */
@@ -150,7 +146,6 @@ typedef enum
   */
 
 /** @defgroup PSSI_DATA_WIDTH PSSI Data Width
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -162,7 +157,6 @@ typedef enum
   */
 
 /** @defgroup PSSI_BUS_WIDTH PSSI Bus Width
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -172,7 +166,6 @@ typedef enum
   * @}
   */
 /** @defgroup PSSI_MODE PSSI mode
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define HAL_PSSI_UNIDIRECTIONAL         0x00000000U /*!< Uni-directional mode */
@@ -182,7 +175,6 @@ typedef enum
   */
 
 /** @defgroup PSSI_ControlSignal Configuration
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define HAL_PSSI_DE_RDY_DISABLE           (0x0U << PSSI_CR_DERDYCFG_Pos) /*!< Neither DE nor RDY are enabled */
@@ -200,7 +192,6 @@ typedef enum
 
 
 /** @defgroup PSSI_Data_Enable_Polarity Data Enable Polarity
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define HAL_PSSI_DEPOL_ACTIVE_LOW         0x0U            /*!< Active Low */
@@ -209,7 +200,6 @@ typedef enum
   * @}
   */
 /** @defgroup PSSI_Reday_Polarity Reday Polarity
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define HAL_PSSI_RDYPOL_ACTIVE_LOW        0x0U            /*!< Active Low */
@@ -219,7 +209,6 @@ typedef enum
   */
 
 /** @defgroup PSSI_Clock_Polarity Clock Polarity
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define HAL_PSSI_FALLING_EDGE             0x0U            /*!< Fallling Edge */
@@ -232,7 +221,6 @@ typedef enum
 
 
 /** @defgroup PSSI_DEFINITION PSSI definitions
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -243,7 +231,7 @@ typedef enum
 #define PSSI_CR_OUTEN_OUTPUT        PSSI_CR_OUTEN    /*!< Output Mode     */
 
 #define PSSI_CR_DMA_ENABLE          PSSI_CR_DMAEN    /*!< DMA Mode Enable */
-#define PSSI_CR_DMA_DISABLE         (~PSSI_CR_DMAEN) /*!< DMA Mode Disble */
+#define PSSI_CR_DMA_DISABLE         (~PSSI_CR_DMAEN) /*!< DMA Mode Disable */
 
 #define PSSI_CR_16BITS              PSSI_CR_EDM      /*!< 16 Lines Mode   */
 #define PSSI_CR_8BITS               (~PSSI_CR_EDM)   /*!< 8 Lines Mode    */
@@ -258,7 +246,6 @@ typedef enum
   */
 
 /** @defgroup PSSI_Interrupts PSSI Interrupts
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -276,7 +263,6 @@ typedef enum
   */
 /* Exported macros ------------------------------------------------------------*/
 /** @defgroup PSSI_Exported_Macros PSSI Exported Macros
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -514,6 +500,3 @@ uint32_t               HAL_PSSI_GetError(PSSI_HandleTypeDef *hpssi);
 #endif
 
 #endif /* STM32H7xx_HAL_PSSI_H */
-
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

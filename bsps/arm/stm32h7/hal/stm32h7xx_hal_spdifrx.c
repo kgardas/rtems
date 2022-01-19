@@ -8,6 +8,18 @@
   *           + Data transfers functions
   *           + DMA transfers management
   *           + Interrupts and flags management
+  *
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
   @verbatim
  ===============================================================================
                   ##### How to use this driver #####
@@ -93,7 +105,7 @@
 
   The compilation define  USE_HAL_SPDIFRX_REGISTER_CALLBACKS when set to 1
   allows the user to configure dynamically the driver callbacks.
-  Use HAL_SPDIFRX_RegisterCallback() funtion to register an interrupt callback.
+  Use HAL_SPDIFRX_RegisterCallback() function to register an interrupt callback.
 
   The HAL_SPDIFRX_RegisterCallback() function allows to register the following callbacks:
     (+) RxHalfCpltCallback  : SPDIFRX Data flow half completed callback.
@@ -142,18 +154,6 @@
   are set to the corresponding weak functions.
 
   @endverbatim
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
-  *
-  ******************************************************************************
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -164,7 +164,6 @@
   */
 
 /** @defgroup SPDIFRX SPDIFRX
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @brief SPDIFRX HAL module driver
   * @{
   */
@@ -196,12 +195,10 @@ static HAL_StatusTypeDef  SPDIFRX_WaitOnFlagUntilTimeout(SPDIFRX_HandleTypeDef *
 /* Exported functions ---------------------------------------------------------*/
 
 /** @defgroup SPDIFRX_Exported_Functions SPDIFRX Exported Functions
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
 /** @defgroup  SPDIFRX_Exported_Functions_Group1 Initialization and de-initialization functions
-  * @ingroup RTEMSBSPsARMSTM32H7
   *  @brief    Initialization and Configuration functions
   *
   @verbatim
@@ -660,7 +657,6 @@ HAL_StatusTypeDef HAL_SPDIFRX_SetDataFormat(SPDIFRX_HandleTypeDef *hspdif, SPDIF
   */
 
 /** @defgroup SPDIFRX_Exported_Functions_Group2 IO operation functions
-  * @ingroup RTEMSBSPsARMSTM32H7
   *  @brief Data transfers functions
   *
 @verbatim
@@ -857,7 +853,7 @@ HAL_StatusTypeDef HAL_SPDIFRX_ReceiveCtrlFlow(SPDIFRX_HandleTypeDef *hspdif, uin
   */
 HAL_StatusTypeDef HAL_SPDIFRX_ReceiveDataFlow_IT(SPDIFRX_HandleTypeDef *hspdif, uint32_t *pData, uint16_t Size)
 {
-  register uint32_t count = SPDIFRX_TIMEOUT_VALUE * (SystemCoreClock / 24U / 1000U);
+  uint32_t count = SPDIFRX_TIMEOUT_VALUE * (SystemCoreClock / 24U / 1000U);
 
   const HAL_SPDIFRX_StateTypeDef tempState = hspdif->State;
 
@@ -942,7 +938,7 @@ HAL_StatusTypeDef HAL_SPDIFRX_ReceiveDataFlow_IT(SPDIFRX_HandleTypeDef *hspdif, 
   */
 HAL_StatusTypeDef HAL_SPDIFRX_ReceiveCtrlFlow_IT(SPDIFRX_HandleTypeDef *hspdif, uint32_t *pData, uint16_t Size)
 {
-  register uint32_t count = SPDIFRX_TIMEOUT_VALUE * (SystemCoreClock / 24U / 1000U);
+  uint32_t count = SPDIFRX_TIMEOUT_VALUE * (SystemCoreClock / 24U / 1000U);
 
   const HAL_SPDIFRX_StateTypeDef tempState = hspdif->State;
 
@@ -1027,7 +1023,7 @@ HAL_StatusTypeDef HAL_SPDIFRX_ReceiveCtrlFlow_IT(SPDIFRX_HandleTypeDef *hspdif, 
   */
 HAL_StatusTypeDef HAL_SPDIFRX_ReceiveDataFlow_DMA(SPDIFRX_HandleTypeDef *hspdif, uint32_t *pData, uint16_t Size)
 {
-  register uint32_t count = SPDIFRX_TIMEOUT_VALUE * (SystemCoreClock / 24U / 1000U);
+  uint32_t count = SPDIFRX_TIMEOUT_VALUE * (SystemCoreClock / 24U / 1000U);
 
   const HAL_SPDIFRX_StateTypeDef tempState = hspdif->State;
 
@@ -1128,7 +1124,7 @@ HAL_StatusTypeDef HAL_SPDIFRX_ReceiveDataFlow_DMA(SPDIFRX_HandleTypeDef *hspdif,
   */
 HAL_StatusTypeDef HAL_SPDIFRX_ReceiveCtrlFlow_DMA(SPDIFRX_HandleTypeDef *hspdif, uint32_t *pData, uint16_t Size)
 {
-  register uint32_t count = SPDIFRX_TIMEOUT_VALUE * (SystemCoreClock / 24U / 1000U);
+  uint32_t count = SPDIFRX_TIMEOUT_VALUE * (SystemCoreClock / 24U / 1000U);
 
   const HAL_SPDIFRX_StateTypeDef tempState = hspdif->State;
 
@@ -1378,7 +1374,6 @@ __weak void HAL_SPDIFRX_ErrorCallback(SPDIFRX_HandleTypeDef *hspdif)
   */
 
 /** @defgroup SPDIFRX_Exported_Functions_Group3 Peripheral State and Errors functions
-  * @ingroup RTEMSBSPsARMSTM32H7
   *  @brief   Peripheral State functions
   *
 @verbatim
@@ -1636,5 +1631,3 @@ static HAL_StatusTypeDef SPDIFRX_WaitOnFlagUntilTimeout(SPDIFRX_HandleTypeDef *h
 /**
   * @}
   */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

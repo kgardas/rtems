@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -35,7 +34,6 @@ extern "C" {
 #if defined (LPTIM1) || defined (LPTIM2) || defined (LPTIM3) || defined (LPTIM4) || defined (LPTIM5)
 
 /** @defgroup LPTIM_LL LPTIM
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -45,9 +43,8 @@ extern "C" {
 /* Private constants ---------------------------------------------------------*/
 
 /* Private macros ------------------------------------------------------------*/
-#if defined(USE_FULL_LL_DRIVER) || defined(__rtems__)
+#if defined(USE_FULL_LL_DRIVER)
 /** @defgroup LPTIM_LL_Private_Macros LPTIM Private Macros
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 /**
@@ -56,9 +53,8 @@ extern "C" {
 #endif /*USE_FULL_LL_DRIVER*/
 
 /* Exported types ------------------------------------------------------------*/
-#if defined(USE_FULL_LL_DRIVER) || defined(__rtems__)
+#if defined(USE_FULL_LL_DRIVER)
 /** @defgroup LPTIM_LL_ES_INIT LPTIM Exported Init structure
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -70,22 +66,26 @@ typedef struct
   uint32_t ClockSource;    /*!< Specifies the source of the clock used by the LPTIM instance.
                                 This parameter can be a value of @ref LPTIM_LL_EC_CLK_SOURCE.
 
-                                This feature can be modified afterwards using unitary function @ref LL_LPTIM_SetClockSource().*/
+                                This feature can be modified afterwards using unitary
+                                function @ref LL_LPTIM_SetClockSource().*/
 
   uint32_t Prescaler;      /*!< Specifies the prescaler division ratio.
                                 This parameter can be a value of @ref LPTIM_LL_EC_PRESCALER.
 
-                                This feature can be modified afterwards using using unitary function @ref LL_LPTIM_SetPrescaler().*/
+                                This feature can be modified afterwards using using unitary
+                                function @ref LL_LPTIM_SetPrescaler().*/
 
   uint32_t Waveform;       /*!< Specifies the waveform shape.
                                 This parameter can be a value of @ref LPTIM_LL_EC_OUTPUT_WAVEFORM.
 
-                                This feature can be modified afterwards using unitary function @ref LL_LPTIM_ConfigOutput().*/
+                                This feature can be modified afterwards using unitary
+                                function @ref LL_LPTIM_ConfigOutput().*/
 
   uint32_t Polarity;       /*!< Specifies waveform polarity.
                                 This parameter can be a value of @ref LPTIM_LL_EC_OUTPUT_POLARITY.
 
-                                This feature can be modified afterwards using unitary function @ref LL_LPTIM_ConfigOutput().*/
+                                This feature can be modified afterwards using unitary
+                                function @ref LL_LPTIM_ConfigOutput().*/
 } LL_LPTIM_InitTypeDef;
 
 /**
@@ -95,19 +95,17 @@ typedef struct
 
 /* Exported constants --------------------------------------------------------*/
 /** @defgroup LPTIM_LL_Exported_Constants LPTIM Exported Constants
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
 /** @defgroup LPTIM_LL_EC_GET_FLAG Get Flags Defines
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @brief    Flags defines which can be used with LL_LPTIM_ReadReg function
   * @{
   */
 #define LL_LPTIM_ISR_CMPM                     LPTIM_ISR_CMPM     /*!< Compare match */
+#define LL_LPTIM_ISR_CMPOK                    LPTIM_ISR_CMPOK    /*!< Compare register update OK */
 #define LL_LPTIM_ISR_ARRM                     LPTIM_ISR_ARRM     /*!< Autoreload match */
 #define LL_LPTIM_ISR_EXTTRIG                  LPTIM_ISR_EXTTRIG  /*!< External trigger edge event */
-#define LL_LPTIM_ISR_CMPOK                    LPTIM_ISR_CMPOK    /*!< Compare register update OK */
 #define LL_LPTIM_ISR_ARROK                    LPTIM_ISR_ARROK    /*!< Autoreload register update OK */
 #define LL_LPTIM_ISR_UP                       LPTIM_ISR_UP       /*!< Counter direction change down to up */
 #define LL_LPTIM_ISR_DOWN                     LPTIM_ISR_DOWN     /*!< Counter direction change up to down */
@@ -116,23 +114,21 @@ typedef struct
   */
 
 /** @defgroup LPTIM_LL_EC_IT IT Defines
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @brief    IT defines which can be used with LL_LPTIM_ReadReg and  LL_LPTIM_WriteReg functions
   * @{
   */
-#define LL_LPTIM_IER_CMPMIE                   LPTIM_IER_CMPMIE       /*!< Compare match Interrupt Enable */
-#define LL_LPTIM_IER_ARRMIE                   LPTIM_IER_ARRMIE       /*!< Autoreload match Interrupt Enable */
-#define LL_LPTIM_IER_EXTTRIGIE                LPTIM_IER_EXTTRIGIE    /*!< External trigger valid edge Interrupt Enable */
-#define LL_LPTIM_IER_CMPOKIE                  LPTIM_IER_CMPOKIE      /*!< Compare register update OK Interrupt Enable */
-#define LL_LPTIM_IER_ARROKIE                  LPTIM_IER_ARROKIE      /*!< Autoreload register update OK Interrupt Enable */
-#define LL_LPTIM_IER_UPIE                     LPTIM_IER_UPIE         /*!< Direction change to UP Interrupt Enable */
-#define LL_LPTIM_IER_DOWNIE                   LPTIM_IER_DOWNIE       /*!< Direction change to down Interrupt Enable */
+#define LL_LPTIM_IER_CMPMIE                   LPTIM_IER_CMPMIE     /*!< Compare match */
+#define LL_LPTIM_IER_CMPOKIE                  LPTIM_IER_CMPOKIE    /*!< Compare register update OK */
+#define LL_LPTIM_IER_ARRMIE                   LPTIM_IER_ARRMIE     /*!< Autoreload match */
+#define LL_LPTIM_IER_EXTTRIGIE                LPTIM_IER_EXTTRIGIE  /*!< External trigger edge event */
+#define LL_LPTIM_IER_ARROKIE                  LPTIM_IER_ARROKIE    /*!< Autoreload register update OK */
+#define LL_LPTIM_IER_UPIE                     LPTIM_IER_UPIE       /*!< Counter direction change down to up */
+#define LL_LPTIM_IER_DOWNIE                   LPTIM_IER_DOWNIE     /*!< Counter direction change up to down */
 /**
   * @}
   */
 
 /** @defgroup LPTIM_LL_EC_OPERATING_MODE Operating Mode
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define LL_LPTIM_OPERATING_MODE_CONTINUOUS    LPTIM_CR_CNTSTRT /*!<LP Timer starts in continuous mode*/
@@ -142,7 +138,6 @@ typedef struct
   */
 
 /** @defgroup LPTIM_LL_EC_UPDATE_MODE Update Mode
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define LL_LPTIM_UPDATE_MODE_IMMEDIATE        0x00000000U        /*!<Preload is disabled: registers are updated after each APB bus write access*/
@@ -152,7 +147,6 @@ typedef struct
   */
 
 /** @defgroup LPTIM_LL_EC_COUNTER_MODE Counter Mode
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define LL_LPTIM_COUNTER_MODE_INTERNAL        0x00000000U          /*!<The counter is incremented following each internal clock pulse*/
@@ -162,17 +156,15 @@ typedef struct
   */
 
 /** @defgroup LPTIM_LL_EC_OUTPUT_WAVEFORM Output Waveform Type
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
-#define LL_LPTIM_OUTPUT_WAVEFORM_PWM          0x00000000U     /*!<LPTIM  generates either a PWM waveform or a One pulse waveform depending on chosen operating mode CONTINOUS or SINGLE*/
+#define LL_LPTIM_OUTPUT_WAVEFORM_PWM          0x00000000U     /*!<LPTIM  generates either a PWM waveform or a One pulse waveform depending on chosen operating mode CONTINUOUS or SINGLE*/
 #define LL_LPTIM_OUTPUT_WAVEFORM_SETONCE      LPTIM_CFGR_WAVE /*!<LPTIM  generates a Set Once waveform*/
 /**
   * @}
   */
 
 /** @defgroup LPTIM_LL_EC_OUTPUT_POLARITY Output Polarity
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define LL_LPTIM_OUTPUT_POLARITY_REGULAR      0x00000000U             /*!<The LPTIM output reflects the compare results between LPTIMx_ARR and LPTIMx_CMP registers*/
@@ -182,7 +174,6 @@ typedef struct
   */
 
 /** @defgroup LPTIM_LL_EC_PRESCALER Prescaler Value
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define LL_LPTIM_PRESCALER_DIV1               0x00000000U                               /*!<Prescaler division factor is set to 1*/
@@ -198,7 +189,6 @@ typedef struct
   */
 
 /** @defgroup LPTIM_LL_EC_TRIG_SOURCE Trigger Source
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define LL_LPTIM_TRIG_SOURCE_GPIO             0x00000000U                                                          /*!<External input trigger is connected to TIMx_ETR input*/
@@ -212,20 +202,19 @@ typedef struct
 #define LL_LPTIM_TRIG_SOURCE_LPTIM2           0x00000000U                                                          /*!<External input trigger is connected to LPTIM2 output*/
 #define LL_LPTIM_TRIG_SOURCE_LPTIM3           LPTIM_CFGR_TRIGSEL_0                                                 /*!<External input trigger is connected to LPTIM3 output*/
 #define LL_LPTIM_TRIG_SOURCE_LPTIM4           LPTIM_CFGR_TRIGSEL_1                                                 /*!<External input trigger is connected to LPTIM4 output*/
-#define LL_LPTIM_TRIG_SOURCE_LPTIM5           (LPTIM_CFGR_TRIGSEL_1|LPTIM_CFGR_TRIGSEL_0)                          /*!<External input trigger is connected to LPTIM5 output*/
+#define LL_LPTIM_TRIG_SOURCE_LPTIM5           (LPTIM_CFGR_TRIGSEL_1 | LPTIM_CFGR_TRIGSEL_0)                        /*!<External input trigger is connected to LPTIM5 output*/
 #define LL_LPTIM_TRIG_SOURCE_SAI1_FS_A        LPTIM_CFGR_TRIGSEL_2                                                 /*!<External input trigger is connected to SAI1 FS A output*/
-#define LL_LPTIM_TRIG_SOURCE_SAI1_FS_B        (LPTIM_CFGR_TRIGSEL_2|LPTIM_CFGR_TRIGSEL_0)                          /*!<External input trigger is connected to SAI1 FS B output*/
+#define LL_LPTIM_TRIG_SOURCE_SAI1_FS_B        (LPTIM_CFGR_TRIGSEL_2 | LPTIM_CFGR_TRIGSEL_0)                        /*!<External input trigger is connected to SAI1 FS B output*/
 #define LL_LPTIM_TRIG_SOURCE_SAI2_FS_A        LPTIM_CFGR_TRIGSEL_2                                                 /*!<External input trigger is connected to SAI2 FS A output*/
-#define LL_LPTIM_TRIG_SOURCE_SAI2_FS_B        (LPTIM_CFGR_TRIGSEL_2|LPTIM_CFGR_TRIGSEL_0)                          /*!<External input trigger is connected to SAI2 FS B output*/
-#define LL_LPTIM_TRIG_SOURCE_SAI4_FS_A        (LPTIM_CFGR_TRIGSEL_1|LPTIM_CFGR_TRIGSEL_0)                          /*!<External input trigger is connected to SAI4 FS A output*/
+#define LL_LPTIM_TRIG_SOURCE_SAI2_FS_B        (LPTIM_CFGR_TRIGSEL_2 | LPTIM_CFGR_TRIGSEL_0)                        /*!<External input trigger is connected to SAI2 FS B output*/
+#define LL_LPTIM_TRIG_SOURCE_SAI4_FS_A        (LPTIM_CFGR_TRIGSEL_1 | LPTIM_CFGR_TRIGSEL_0)                        /*!<External input trigger is connected to SAI4 FS A output*/
 #define LL_LPTIM_TRIG_SOURCE_SAI4_FS_B        LPTIM_CFGR_TRIGSEL_2                                                 /*!<External input trigger is connected to SAI4 FS B output*/
-#define LL_LPTIM_TRIG_SOURCE_DFSDM2_BRK       (LPTIM_CFGR_TRIGSEL_2|LPTIM_CFGR_TRIGSEL_1)                          /*!<External input trigger is connected to DFSDM2_BRK[0] */
+#define LL_LPTIM_TRIG_SOURCE_DFSDM2_BRK       (LPTIM_CFGR_TRIGSEL_2 | LPTIM_CFGR_TRIGSEL_1)                        /*!<External input trigger is connected to DFSDM2_BRK[0] */
 /**
   * @}
   */
 
 /** @defgroup LPTIM_LL_EC_TRIG_FILTER Trigger Filter
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define LL_LPTIM_TRIG_FILTER_NONE             0x00000000U         /*!<Any trigger active level change is considered as a valid trigger*/
@@ -237,7 +226,6 @@ typedef struct
   */
 
 /** @defgroup LPTIM_LL_EC_TRIG_POLARITY Trigger Polarity
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define LL_LPTIM_TRIG_POLARITY_RISING         LPTIM_CFGR_TRIGEN_0 /*!<LPTIM counter starts when a rising edge is detected*/
@@ -248,7 +236,6 @@ typedef struct
   */
 
 /** @defgroup LPTIM_LL_EC_CLK_SOURCE Clock Source
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define LL_LPTIM_CLK_SOURCE_INTERNAL          0x00000000U      /*!<LPTIM is clocked by internal clock source (APB clock or any of the embedded oscillators)*/
@@ -258,7 +245,6 @@ typedef struct
   */
 
 /** @defgroup LPTIM_LL_EC_CLK_FILTER Clock Filter
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define LL_LPTIM_CLK_FILTER_NONE              0x00000000U        /*!<Any external clock signal level change is considered as a valid transition*/
@@ -270,7 +256,6 @@ typedef struct
   */
 
 /** @defgroup LPTIM_LL_EC_CLK_POLARITY Clock Polarity
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define LL_LPTIM_CLK_POLARITY_RISING          0x00000000U        /*!< The rising edge is the active edge used for counting*/
@@ -281,7 +266,6 @@ typedef struct
   */
 
 /** @defgroup LPTIM_LL_EC_ENCODER_MODE Encoder Mode
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define LL_LPTIM_ENCODER_MODE_RISING          0x00000000U        /*!< The rising edge is the active edge used for counting*/
@@ -292,7 +276,6 @@ typedef struct
   */
 
 /** @defgroup LPTIM_EC_INPUT1_SRC Input1 Source
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define LL_LPTIM_INPUT1_SRC_GPIO         0x00000000U                                            /*!< For LPTIM1 and LPTIM2 */
@@ -306,7 +289,6 @@ typedef struct
   */
 
 /** @defgroup LPTIM_EC_INPUT2_SRC Input2 Source
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define LL_LPTIM_INPUT2_SRC_GPIO         0x00000000U                   /*!< For LPTIM1 */
@@ -321,12 +303,10 @@ typedef struct
 
 /* Exported macro ------------------------------------------------------------*/
 /** @defgroup LPTIM_LL_Exported_Macros LPTIM Exported Macros
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
 /** @defgroup LPTIM_LL_EM_WRITE_READ Common Write and read registers Macros
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -356,13 +336,11 @@ typedef struct
 
 /* Exported functions --------------------------------------------------------*/
 /** @defgroup LPTIM_LL_Exported_Functions LPTIM Exported Functions
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
-#if defined(USE_FULL_LL_DRIVER) || defined(__rtems__)
+#if defined(USE_FULL_LL_DRIVER)
 /** @defgroup LPTIM_LL_EF_Init Initialisation and deinitialisation functions
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -376,7 +354,6 @@ void LL_LPTIM_Disable(LPTIM_TypeDef *LPTIMx);
 #endif /* USE_FULL_LL_DRIVER */
 
 /** @defgroup LPTIM_LL_EF_LPTIM_Configuration LPTIM Configuration
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -756,7 +733,6 @@ __STATIC_INLINE void LL_LPTIM_SetInput2Src(LPTIM_TypeDef *LPTIMx, uint32_t Src)
   */
 
 /** @defgroup LPTIM_LL_EF_Trigger_Configuration Trigger Configuration
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -929,7 +905,6 @@ __STATIC_INLINE uint32_t LL_LPTIM_GetTriggerPolarity(LPTIM_TypeDef *LPTIMx)
   */
 
 /** @defgroup LPTIM_LL_EF_Clock_Configuration Clock Configuration
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -962,7 +937,8 @@ __STATIC_INLINE uint32_t LL_LPTIM_GetClockSource(LPTIM_TypeDef *LPTIMx)
 }
 
 /**
-  * @brief  Configure the active edge or edges used by the counter when the LPTIM is clocked by an external clock source.
+  * @brief  Configure the active edge or edges used by the counter when
+            the LPTIM is clocked by an external clock source.
   * @note This function must be called when the LPTIM instance is disabled.
   * @note When both external clock signal edges are considered active ones,
   *       the LPTIM must also be clocked by an internal clock source with a
@@ -1022,7 +998,6 @@ __STATIC_INLINE uint32_t LL_LPTIM_GetClockFilter(LPTIM_TypeDef *LPTIMx)
   */
 
 /** @defgroup LPTIM_LL_EF_Encoder_Mode Encoder Mode
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -1100,7 +1075,6 @@ __STATIC_INLINE uint32_t LL_LPTIM_IsEnabledEncoderMode(LPTIM_TypeDef *LPTIMx)
   */
 
 /** @defgroup LPTIM_LL_EF_FLAG_Management FLAG Management
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -1182,7 +1156,8 @@ __STATIC_INLINE void LL_LPTIM_ClearFlag_CMPOK(LPTIM_TypeDef *LPTIMx)
 }
 
 /**
-  * @brief  Informs application whether the APB bus write operation to the LPTIMx_CMP register has been successfully completed. If so, a new one can be initiated.
+  * @brief  Informs application whether the APB bus write operation to the LPTIMx_CMP register has been successfully
+            completed. If so, a new one can be initiated.
   * @rmtoll ISR          CMPOK         LL_LPTIM_IsActiveFlag_CMPOK
   * @param  LPTIMx Low-Power Timer instance
   * @retval State of bit (1 or 0).
@@ -1204,7 +1179,8 @@ __STATIC_INLINE void LL_LPTIM_ClearFlag_ARROK(LPTIM_TypeDef *LPTIMx)
 }
 
 /**
-  * @brief  Informs application whether the APB bus write operation to the LPTIMx_ARR register has been successfully completed. If so, a new one can be initiated.
+  * @brief  Informs application whether the APB bus write operation to the LPTIMx_ARR register has been successfully
+            completed. If so, a new one can be initiated.
   * @rmtoll ISR          ARROK         LL_LPTIM_IsActiveFlag_ARROK
   * @param  LPTIMx Low-Power Timer instance
   * @retval State of bit (1 or 0).
@@ -1226,7 +1202,8 @@ __STATIC_INLINE void LL_LPTIM_ClearFlag_UP(LPTIM_TypeDef *LPTIMx)
 }
 
 /**
-  * @brief  Informs the application whether the counter direction has changed from down to up (when the LPTIM instance operates in encoder mode).
+  * @brief  Informs the application whether the counter direction has changed from down to up (when the LPTIM instance
+            operates in encoder mode).
   * @rmtoll ISR          UP            LL_LPTIM_IsActiveFlag_UP
   * @param  LPTIMx Low-Power Timer instance
   * @retval State of bit (1 or 0).
@@ -1248,7 +1225,8 @@ __STATIC_INLINE void LL_LPTIM_ClearFlag_DOWN(LPTIM_TypeDef *LPTIMx)
 }
 
 /**
-  * @brief  Informs the application whether the counter direction has changed from up to down (when the LPTIM instance operates in encoder mode).
+  * @brief  Informs the application whether the counter direction has changed from up to down (when the LPTIM instance
+            operates in encoder mode).
   * @rmtoll ISR          DOWN          LL_LPTIM_IsActiveFlag_DOWN
   * @param  LPTIMx Low-Power Timer instance
   * @retval State of bit (1 or 0).
@@ -1263,7 +1241,6 @@ __STATIC_INLINE uint32_t LL_LPTIM_IsActiveFlag_DOWN(LPTIM_TypeDef *LPTIMx)
   */
 
 /** @defgroup LPTIM_LL_EF_IT_Management Interrupt Management
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -1401,7 +1378,7 @@ __STATIC_INLINE uint32_t LL_LPTIM_IsEnabledIT_CMPOK(LPTIM_TypeDef *LPTIMx)
 
 /**
   * @brief  Enable autoreload register write completed interrupt (ARROKIE).
-  * @rmtoll IER          ARROKIE       LL_LPTIM_EnableIT_ARROK
+  * @rmtoll IER         ARROKIE       LL_LPTIM_EnableIT_ARROK
   * @param  LPTIMx Low-Power Timer instance
   * @retval None
   */
@@ -1412,7 +1389,7 @@ __STATIC_INLINE void LL_LPTIM_EnableIT_ARROK(LPTIM_TypeDef *LPTIMx)
 
 /**
   * @brief  Disable autoreload register write completed interrupt (ARROKIE).
-  * @rmtoll IER          ARROKIE       LL_LPTIM_DisableIT_ARROK
+  * @rmtoll IER         ARROKIE       LL_LPTIM_DisableIT_ARROK
   * @param  LPTIMx Low-Power Timer instance
   * @retval None
   */
@@ -1423,7 +1400,7 @@ __STATIC_INLINE void LL_LPTIM_DisableIT_ARROK(LPTIM_TypeDef *LPTIMx)
 
 /**
   * @brief  Indicates whether the autoreload register write completed interrupt (ARROKIE) is enabled.
-  * @rmtoll IER          ARROKIE       LL_LPTIM_IsEnabledIT_ARROK
+  * @rmtoll IER         ARROKIE       LL_LPTIM_IsEnabledIT_ARROK
   * @param  LPTIMx Low-Power Timer instance
   * @retval State of bit(1 or 0).
   */
@@ -1434,7 +1411,7 @@ __STATIC_INLINE uint32_t LL_LPTIM_IsEnabledIT_ARROK(LPTIM_TypeDef *LPTIMx)
 
 /**
   * @brief  Enable direction change to up interrupt (UPIE).
-  * @rmtoll IER          UPIE          LL_LPTIM_EnableIT_UP
+  * @rmtoll IER         UPIE          LL_LPTIM_EnableIT_UP
   * @param  LPTIMx Low-Power Timer instance
   * @retval None
   */
@@ -1445,7 +1422,7 @@ __STATIC_INLINE void LL_LPTIM_EnableIT_UP(LPTIM_TypeDef *LPTIMx)
 
 /**
   * @brief  Disable direction change to up interrupt (UPIE).
-  * @rmtoll IER          UPIE          LL_LPTIM_DisableIT_UP
+  * @rmtoll IER         UPIE          LL_LPTIM_DisableIT_UP
   * @param  LPTIMx Low-Power Timer instance
   * @retval None
   */
@@ -1456,7 +1433,7 @@ __STATIC_INLINE void LL_LPTIM_DisableIT_UP(LPTIM_TypeDef *LPTIMx)
 
 /**
   * @brief  Indicates whether the direction change to up interrupt (UPIE) is enabled.
-  * @rmtoll IER          UPIE          LL_LPTIM_IsEnabledIT_UP
+  * @rmtoll IER         UPIE          LL_LPTIM_IsEnabledIT_UP
   * @param  LPTIMx Low-Power Timer instance
   * @retval State of bit(1 or 0).
   */
@@ -1467,7 +1444,7 @@ __STATIC_INLINE uint32_t LL_LPTIM_IsEnabledIT_UP(LPTIM_TypeDef *LPTIMx)
 
 /**
   * @brief  Enable direction change to down interrupt (DOWNIE).
-  * @rmtoll IER          DOWNIE        LL_LPTIM_EnableIT_DOWN
+  * @rmtoll IER         DOWNIE        LL_LPTIM_EnableIT_DOWN
   * @param  LPTIMx Low-Power Timer instance
   * @retval None
   */
@@ -1478,7 +1455,7 @@ __STATIC_INLINE void LL_LPTIM_EnableIT_DOWN(LPTIM_TypeDef *LPTIMx)
 
 /**
   * @brief  Disable direction change to down interrupt (DOWNIE).
-  * @rmtoll IER          DOWNIE        LL_LPTIM_DisableIT_DOWN
+  * @rmtoll IER         DOWNIE        LL_LPTIM_DisableIT_DOWN
   * @param  LPTIMx Low-Power Timer instance
   * @retval None
   */
@@ -1489,7 +1466,7 @@ __STATIC_INLINE void LL_LPTIM_DisableIT_DOWN(LPTIM_TypeDef *LPTIMx)
 
 /**
   * @brief  Indicates whether the direction change to down interrupt (DOWNIE) is enabled.
-  * @rmtoll IER          DOWNIE        LL_LPTIM_IsEnabledIT_DOWN
+  * @rmtoll IER         DOWNIE        LL_LPTIM_IsEnabledIT_DOWN
   * @param  LPTIMx Low-Power Timer instance
   * @retval State of bit(1 or 0).
   */
@@ -1521,5 +1498,3 @@ __STATIC_INLINE uint32_t LL_LPTIM_IsEnabledIT_DOWN(LPTIM_TypeDef *LPTIMx)
 #endif
 
 #endif /* STM32H7xx_LL_LPTIM_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -6,13 +6,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2017 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -38,7 +37,6 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /** @defgroup TIMEx_Exported_Types TIM Extended Exported Types
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -74,8 +72,7 @@ typedef struct
   uint32_t Polarity;       /*!< Specifies the break input source polarity.
                                 This parameter can be a value of @ref TIMEx_Break_Input_Source_Polarity
                                 Not relevant when analog watchdog output of the DFSDM1 used as break input source */
-}
-TIMEx_BreakInputConfigTypeDef;
+} TIMEx_BreakInputConfigTypeDef;
 
 #endif /* TIM_BREAK_INPUT_SUPPORT */
 /**
@@ -85,12 +82,10 @@ TIMEx_BreakInputConfigTypeDef;
 
 /* Exported constants --------------------------------------------------------*/
 /** @defgroup TIMEx_Exported_Constants TIM Extended Exported Constants
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
 /** @defgroup TIMEx_Remap TIM Extended Remapping
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define TIM_TIM1_ETR_GPIO        0x00000000U                                                 /* !< TIM1_ETR is connected to GPIO */
@@ -144,17 +139,15 @@ TIMEx_BreakInputConfigTypeDef;
 #if defined(TIM_BREAK_INPUT_SUPPORT)
 
 /** @defgroup TIMEx_Break_Input TIM Extended Break input
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
-#define TIM_BREAKINPUT_BRK     0x00000001U                                      /* !< Timer break input  */
-#define TIM_BREAKINPUT_BRK2    0x00000002U                                      /* !< Timer break2 input */
+#define TIM_BREAKINPUT_BRK     0x00000001U                                      /*!< Timer break input  */
+#define TIM_BREAKINPUT_BRK2    0x00000002U                                      /*!< Timer break2 input */
 /**
   * @}
   */
 
 /** @defgroup TIMEx_Break_Input_Source TIM Extended Break input source
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define TIM_BREAKINPUTSOURCE_BKIN     0x00000001U                               /* !< An external source (GPIO) is connected to the BKIN pin  */
@@ -166,28 +159,25 @@ TIMEx_BreakInputConfigTypeDef;
   */
 
 /** @defgroup TIMEx_Break_Input_Source_Enable TIM Extended Break input source enabling
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
-#define TIM_BREAKINPUTSOURCE_DISABLE     0x00000000U                            /* !< Break input source is disabled */
-#define TIM_BREAKINPUTSOURCE_ENABLE      0x00000001U                            /* !< Break input source is enabled */
+#define TIM_BREAKINPUTSOURCE_DISABLE     0x00000000U                            /*!< Break input source is disabled */
+#define TIM_BREAKINPUTSOURCE_ENABLE      0x00000001U                            /*!< Break input source is enabled */
 /**
   * @}
   */
 
 /** @defgroup TIMEx_Break_Input_Source_Polarity TIM Extended Break input polarity
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
-#define TIM_BREAKINPUTSOURCE_POLARITY_LOW     0x00000001U                       /* !< Break input source is active low */
-#define TIM_BREAKINPUTSOURCE_POLARITY_HIGH    0x00000000U                       /* !< Break input source is active_high */
+#define TIM_BREAKINPUTSOURCE_POLARITY_LOW     0x00000001U                       /*!< Break input source is active low */
+#define TIM_BREAKINPUTSOURCE_POLARITY_HIGH    0x00000000U                       /*!< Break input source is active_high */
 /**
   * @}
   */
 #endif /* TIM_BREAK_INPUT_SUPPORT */
 
 /** @defgroup TIMEx_Timer_Input_Selection TIM Extended Timer input selection
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define TIM_TIM1_TI1_GPIO                          0x00000000U                               /* !< TIM1_TI1 is connected to GPIO */
@@ -256,7 +246,6 @@ TIMEx_BreakInputConfigTypeDef;
 
 /* Exported macro ------------------------------------------------------------*/
 /** @defgroup TIMEx_Exported_Macros TIM Extended Exported Macros
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 
@@ -267,7 +256,6 @@ TIMEx_BreakInputConfigTypeDef;
 
 /* Private macro -------------------------------------------------------------*/
 /** @defgroup TIMEx_Private_Macros TIM Extended Private Macros
-  * @ingroup RTEMSBSPsARMSTM32H7
   * @{
   */
 #define IS_TIM_BREAKINPUT(__BREAKINPUT__)  (((__BREAKINPUT__) == TIM_BREAKINPUT_BRK)  || \
@@ -478,6 +466,11 @@ HAL_StatusTypeDef HAL_TIMEx_ConfigBreakInput(TIM_HandleTypeDef *htim, uint32_t B
 HAL_StatusTypeDef HAL_TIMEx_GroupChannel5(TIM_HandleTypeDef *htim, uint32_t Channels);
 HAL_StatusTypeDef HAL_TIMEx_RemapConfig(TIM_HandleTypeDef *htim, uint32_t Remap);
 HAL_StatusTypeDef  HAL_TIMEx_TISelection(TIM_HandleTypeDef *htim, uint32_t TISelection, uint32_t Channel);
+#if defined(TIM_BDTR_BKBID)
+
+HAL_StatusTypeDef HAL_TIMEx_DisarmBreakInput(TIM_HandleTypeDef *htim, uint32_t BreakInput);
+HAL_StatusTypeDef HAL_TIMEx_ReArmBreakInput(TIM_HandleTypeDef *htim, uint32_t BreakInput);
+#endif /* TIM_BDTR_BKBID */
 /**
   * @}
   */
@@ -501,6 +494,7 @@ void HAL_TIMEx_Break2Callback(TIM_HandleTypeDef *htim);
   */
 /* Extended Peripheral State functions  ***************************************/
 HAL_TIM_StateTypeDef HAL_TIMEx_HallSensor_GetState(TIM_HandleTypeDef *htim);
+HAL_TIM_ChannelStateTypeDef HAL_TIMEx_GetChannelNState(TIM_HandleTypeDef *htim,  uint32_t ChannelN);
 /**
   * @}
   */
@@ -511,7 +505,7 @@ HAL_TIM_StateTypeDef HAL_TIMEx_HallSensor_GetState(TIM_HandleTypeDef *htim);
 /* End of exported functions -------------------------------------------------*/
 
 /* Private functions----------------------------------------------------------*/
-/** @addtogroup TIMEx_Private_Functions TIMEx Private Functions
+/** @addtogroup TIMEx_Private_Functions TIM Extended Private Functions
   * @{
   */
 void TIMEx_DMACommutationCplt(DMA_HandleTypeDef *hdma);
@@ -535,5 +529,3 @@ void TIMEx_DMACommutationHalfCplt(DMA_HandleTypeDef *hdma);
 
 
 #endif /* STM32H7xx_HAL_TIM_EX_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
