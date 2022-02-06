@@ -182,7 +182,7 @@ HAL_StatusTypeDef HAL_DMAEx_MultiBufferStart(DMA_HandleTypeDef *hdma, uint32_t S
         /* Clear the DMAMUX synchro overrun flag */
         hdma->DMAmuxChannelStatus->CFR = hdma->DMAmuxChannelStatusMask;
 
-        if(hdma->DMAmuxRequestGen != 0U)
+        if(hdma->DMAmuxRequestGen != NULL)
         {
           /* Clear the DMAMUX request generator overrun flag */
           hdma->DMAmuxRequestGenStatus->RGCFR = hdma->DMAmuxRequestGenStatusMask;
@@ -278,7 +278,7 @@ HAL_StatusTypeDef HAL_DMAEx_MultiBufferStart_IT(DMA_HandleTypeDef *hdma, uint32_
       /* Clear the DMAMUX synchro overrun flag */
       hdma->DMAmuxChannelStatus->CFR = hdma->DMAmuxChannelStatusMask;
 
-      if(hdma->DMAmuxRequestGen != 0U)
+      if(hdma->DMAmuxRequestGen != NULL)
       {
         /* Clear the DMAMUX request generator overrun flag */
         hdma->DMAmuxRequestGenStatus->RGCFR = hdma->DMAmuxRequestGenStatusMask;
@@ -318,7 +318,7 @@ HAL_StatusTypeDef HAL_DMAEx_MultiBufferStart_IT(DMA_HandleTypeDef *hdma, uint32_
         hdma->DMAmuxChannel->CCR |= DMAMUX_CxCR_SOIE;
       }
 
-      if(hdma->DMAmuxRequestGen != 0U)
+      if(hdma->DMAmuxRequestGen != NULL)
       {
         /* if using DMAMUX request generator, enable the DMAMUX request generator overrun IT*/
         /* enable the request gen overrun IT*/
@@ -485,7 +485,7 @@ HAL_StatusTypeDef HAL_DMAEx_ConfigMuxRequestGenerator (DMA_HandleTypeDef *hdma, 
   /* check if the DMA state is ready
      and DMA is using a DMAMUX request generator block
   */
-  if(hdma->DMAmuxRequestGen == 0U)
+  if(hdma->DMAmuxRequestGen == NULL)
   {
     /* Set the error code to busy */
     hdma->ErrorCode = HAL_DMA_ERROR_PARAM;
@@ -534,7 +534,7 @@ HAL_StatusTypeDef HAL_DMAEx_EnableMuxRequestGenerator (DMA_HandleTypeDef *hdma)
 
   /* check if the DMA state is ready
      and DMA is using a DMAMUX request generator block */
-  if((hdma->State != HAL_DMA_STATE_RESET) && (hdma->DMAmuxRequestGen != 0U))
+  if((hdma->State != HAL_DMA_STATE_RESET) && (hdma->DMAmuxRequestGen != NULL))
   {
     /* Enable the request generator*/
     hdma->DMAmuxRequestGen->RGCR |= DMAMUX_RGxCR_GE;
@@ -560,7 +560,7 @@ HAL_StatusTypeDef HAL_DMAEx_DisableMuxRequestGenerator (DMA_HandleTypeDef *hdma)
 
   /* check if the DMA state is ready
      and DMA is using a DMAMUX request generator block */
-  if((hdma->State != HAL_DMA_STATE_RESET) && (hdma->DMAmuxRequestGen != 0U))
+  if((hdma->State != HAL_DMA_STATE_RESET) && (hdma->DMAmuxRequestGen != NULL))
   {
     /* Disable the request generator*/
     hdma->DMAmuxRequestGen->RGCR &= ~DMAMUX_RGxCR_GE;
@@ -600,7 +600,7 @@ void HAL_DMAEx_MUX_IRQHandler(DMA_HandleTypeDef *hdma)
     }
   }
 
-  if(hdma->DMAmuxRequestGen != 0)
+  if(hdma->DMAmuxRequestGen != NULL)
   {
    /* if using a DMAMUX request generator block Check for DMAMUX request generator overrun */
     if((hdma->DMAmuxRequestGenStatus->RGSR & hdma->DMAmuxRequestGenStatusMask) != 0U)
