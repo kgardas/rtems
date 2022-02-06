@@ -173,6 +173,7 @@
   * @{
   */
 
+#ifndef __rtems__
 /**
   * @brief  Resets the RCC clock configuration to the default reset state.
   * @note   The default reset state of the clock configuration is given below:
@@ -388,6 +389,7 @@ HAL_StatusTypeDef HAL_RCC_DeInit(void)
 
   return HAL_OK;
 }
+#endif /* __rtems__ */
 
 /**
   * @brief  Initializes the RCC Oscillators according to the specified parameters in the
@@ -1214,7 +1216,11 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(const RCC_ClkInitTypeDef  *RCC_ClkInitStru
 #endif /* DUAL_CORE && CORE_CM4 */
 
   /* Configure the source of time base considering new system clocks settings*/
+#ifndef __rtems__
   halstatus = HAL_InitTick (uwTickPrio);
+#else /* __rtems__ */
+  halstatus = HAL_OK;
+#endif /* __rtems__ */
 
   return halstatus;
 }
