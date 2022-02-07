@@ -1,0 +1,76 @@
+
+Files in this subdirectory which are copyrighted by STMicroelectronics
+are provided with either BSD-3-Clause or Apache License 2.0
+license. The license in use depends on the origin of the particular
+file in question. Files here come from two projects:
+
+stm32h7xx_hal_driver located on:
+https://github.com/STMicroelectronics/stm32h7xx_hal_driver.git
+
+STM32CubeH7 located on:
+https://github.com/STMicroelectronics/STM32CubeH7.git
+
+Files coming from STM32CubeH7 project which are listed in
+explicit list below are provided with Apache License 2.0.
+
+Apache License 2.0 file list:
+
+stm32h723xx.h
+stm32h725xx.h
+stm32h730xx.h
+stm32h730xxq.h
+stm32h733xx.h
+stm32h735xx.h
+stm32h742xx.h
+stm32h743xx.h
+stm32h745xg.h
+stm32h745xx.h
+stm32h747xg.h
+stm32h747xx.h
+stm32h750xx.h
+stm32h753xx.h
+stm32h755xx.h
+stm32h757xx.h
+stm32h7a3xx.h
+stm32h7a3xxq.h
+stm32h7b0xx.h
+stm32h7b0xxq.h
+stm32h7b3xx.h
+stm32h7b3xxq.h
+stm32h7xx.h
+system_stm32h7xx.h
+system_stm32h7xx.c
+
+
+All other files here copyrighted by STMicroelectronics come from
+stm32h7xx_hal_driver project and are provided with BSD-3-Clause
+license below.
+
+
+Copyright 2017 STMicroelectronics.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation and/or
+other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors
+may be used to endorse or promote products derived from this software without
+specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
